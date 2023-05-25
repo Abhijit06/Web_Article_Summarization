@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+{% load static%}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SummaRite</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;1,400&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* body {
+    background-image: url('assets/asset 12.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+} */
+
+        :root {
+            --primary-text-color: #ffffff;
+            --secondary-text-color: #000;
+            --accent-color: #2294ed;
+            --accent-color-dark: rgb(255, 132, 183);
+            --padding-inline-section: 20px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--primary-text-color);
+            /* background: radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, rgba(4, 12, 24, 1) 25%); */
+            background: #EAEAEA;
+        }
+
+        .panel {
+            /* min height incase content is higher than window height */
+            min-height: 100vh;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            font-family: sans-serif;
+            /* outline: 10px solid hotpink; */
+            /* turn above on to see the edge of panels */
+        }
+        
+        /* colours */
+        .color-metal {
+            background: #abbaab;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #ffffff, #abbaab);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        }
+        .color-metal2 {
+            background: #abbaab;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to left, #ffffff, #abbaab);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to left, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        }
+
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        p {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.25rem;
+            color: var(--secondary-text-color);
+            line-height: 1.8rem;
+        }
+
+        a {
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* utility class */
+        .small-bold-text {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1180px;
+            margin-inline: auto;
+            padding-inline: var(--padding-inline-section);
+        }
+
+        /* flex */
+        .flex {
+            display: flex;
+            align-items: center;
+        }
+
+        .hover-links {
+            color: var(--primary-text-color);
+        }
+
+        .hover-links:hover {
+            color: rgb(239, 26, 143);
+            transition: 0.2s ease-out;
+        }
+
+        .primary-button {
+            background-color: var(--primary-text-color);
+            border-radius: 6px;
+            font-weight: 700;
+            color: rgb(239, 26, 143) !important;
+            padding: 12px 24px;
+            box-shadow: 0 0 2px var(--secondary-text-color);
+            transition: 0.2s ease-out;
+        }
+
+        .primary-button:hover {
+            background-color: var(--accent-color-dark);
+        }
+
+        .secondary-button {
+            border: 0.5px solid var(--secondary-text-color);
+            border-radius: 6px;
+            font-weight: 700;
+            color: var(--accent-color) !important;
+            padding: 12px 24px;
+            transition: 0.2s ease-out;
+        }
+
+        .secondary-button:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color-dark) !important;
+        }
+
+        /* top banner */
+
+        .top-banner {
+            background-image: url('assets/asset 32.png');
+            background-color: #4fb3d4;
+            background-size: 300px;
+
+        }
+
+        .banner-text {
+            color: rgb(239, 26, 143);
+            padding: 15px 20px;
+            text-align: center;
+        }
+
+        /* main-nav */
+        .main-nav {
+            margin-top: 10px;
+            justify-content: space-between;
+            height: 116px;
+
+        }
+
+        .company-logo {
+            width: 200px;
+        }
+
+        .nav-links {
+            flex-basis: 730px;
+        }
+
+        .nav-links ul {
+            justify-content: end;
+            gap: 40px;
+        }
+
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 68px;
+            padding-left: initial;
+            padding-right: inherit;
+        }
+
+        .button {
+            align-items: center;
+            background-image: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
+            border: 0;
+            border-radius: 8px;
+            box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            display: flex;
+            font-family: Phantomsans, sans-serif;
+            font-size: 20px;
+            justify-content: center;
+            line-height: 1em;
+            max-width: 100%;
+            min-width: 140px;
+            padding: 19px 24px;
+            text-decoration: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .button:active,
+        .button:hover {
+            outline: 0;
+        }
+
+        .header-section {
+            height: 600px;
+            /* background-image: url('./assets/asset 14.png');
+    background-repeat: no-repeat;
+    background-position: center; */
+            align-items: center;
+        }
+
+        .row {
+            text-align: center;
+            height: 305px;
+            align-items: center;
+        }
+
+        .row2 {
+            text-align: center;
+            height: 400px;
+            align-items: center;
+            color: rgb(239, 26, 143);
+        }
+
+        col {
+            margin: 40px;
+            border: 1px;
+            border-color: black;
+        }
+
+        .row h2 {
+            color: rgb(239, 26, 143);
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        body {
+            line-height: 1.5;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container1 {
+            max-width: 1170px;
+            margin: auto;
+        }
+
+        .row1 {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .footer {
+            background-color: #24262b;
+            padding: 70px 0;
+        }
+
+        .footer-col {
+            width: 33%;
+            padding: 0 15px;
+        }
+
+        .footer-col h4 {
+            font-size: 18px;
+            color: #ffffff;
+            text-transform: capitalize;
+            margin-bottom: 35px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .footer-col h4::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            background-color: #e91e63;
+            height: 2px;
+            box-sizing: border-box;
+            width: 50px;
+        }
+
+        .footer-col ul li:not(:last-child) {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            font-size: 16px;
+            text-transform: capitalize;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 300;
+            color: #bbbbbb;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .footer-col ul li a:hover {
+            color: #ffffff;
+            padding-left: 8px;
+        }
+
+        .footer-col .social-links a {
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            background-color: rgba(255, 255, 255, 0.2);
+            margin: 0 10px 10px 0;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            color: #ffffff;
+            transition: all 0.5s ease;
+        }
+
+        .footer-col .social-links a:hover {
+            color: #24262b;
+            background-color: #ffffff;
+        }
+
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+
+        /*responsive*/
+        @media(max-width: 767px) {
+            .footer-col {
+                width: 50%;
+                margin-bottom: 30px;
+            }
+        }
+
+        @media(max-width: 574px) {
+            .footer-col {
+                width: 100%;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            outline: 0;
+            font-family: "Gill Sans", "Gill Sans MT", Calibri;
+            direction: ltr;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: white;
+        }
+    
+        header {
+            background-color: var(--theme);
+            padding: 20px;
+        }
+
+        header h1 {
+            font-size: large;
+            color: #ffffff;
+        }
+
+        :root {
+            --theme: black;
+        }
+
+        @media (min-width: 768px) {
+        .image-slider-container {
+                width: 70%;
+                margin: 50px auto;
+        }
+        }
+
+        .image-slider-container .image-slider-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 15px;
+        }
+
+        .image-slider-container .image-slider-heading h2 {
+            font-size: 17px;
+            color: black;
+        }
+
+        .image-slider-container .image-slider-heading .swiper-pagination {
+            position: relative;
+            width: auto;
+            padding: 0;
+            margin: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        .image-slider-container .image-slider-heading .swiper-pagination .swiper-pagination-bullet {
+            background-color: #e4e4e4;
+            opacity: 100%;
+            width: 15px;
+            height: 10px;
+            border-radius: 100px;
+            transition: 0.5s;
+            margin: 0px 3px;
+        }
+
+        .image-slider-container .image-slider-heading .swiper-pagination .swiper-pagination-bullet-active {
+            background-color: var(--theme);
+            width: 45px;
+        }
+
+        .image-slider-container .swiper {
+            position: relative;
+        }
+
+        .image-slider-container .swiper .swiper-slide {
+            width: 170px; 
+            margin-right: auto;
+            
+        }
+
+        .image-slider-container .swiper .swiper-slide .slide-con {
+            overflow: hidden;
+            height: 220px;
+            margin: 0px 0px;
+            position: relative;
+            border-radius: 10px;
+        }
+
+        .image-slider-container .swiper .swiper-slide .slide-con .slide-details {
+            padding: 10px;
+            overflow :hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.75);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: column;
+            display: none;
+        }
+
+        .image-slider-container .swiper .swiper-slide .slide-con .slide-details .movie-info {
+            text-align: left;
+        }
+
+        .image-slider-container .swiper .swiper-slide .slide-con .slide-details .movie-info h2 {
+            font-size: 15px;
+            padding: 5px 0px 5px 0px;
+        }
+
+        .image-slider-container .swiper .swiper-slide .slide-con .slide-details .movie-info span {
+            font-size: 13px;
+            margin-right: 0px;
+            color: #727272;
+        }
+
+        .image-slider-container .swiper .swiper-slide .slide-con .slide-details .movie-btns {
+            display: flex;
+            align-items: stretch;
+            justify-content: space-between;
+        }
+
+        .image-slider-container .swiper .swiper-slide .slide-con .slide-details .movie-btns a {
+            text-decoration: none;
+            color: white;
+            padding: 5px 5px;
+            font-size: 13px;
+            margin: 0px 3px;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            color: white;
+        }
+
+        .image-slider-container .swiper .swiper-slide .slide-con .slide-details .movie-btns a svg {
+            font-size: 15px;
+        }
+
+        .image-slider-container .swiper .swiper-slide .slide-con .slide-details .movie-btns a:hover {
+            background-color: transparent;
+            color: white;
+            border: 1px solid white;
+        }
+
+        .image-slider-container .swiper .swiper-slide .slide-con .slide-details .movie-btns .imdb-rate {
+            width: 100%;
+            font-size: 10px;
+            color: #ecc900;
+        }
+
+        .image-slider-container .swiper .swiper-slide .slide-con .slide-details .movie-btns .imdb-rate:hover {
+            background-color: #ecc900;
+            color: black;
+            border: 0;
+        }
+
+        .image-slider-container .swiper .swiper-slide .slide-con .slide-details .movie-btns .like:hover {
+            color: white;
+            background-color: #ff2a00;
+            border: 0;
+        }
+
+        .image-slider-container .swiper .swiper-slide .slide-con .slide-details .movie-btns .show-movie:hover {
+            color: white;
+            background-color: #2a4aff;
+            border: 0;
+        }
+
+        .image-slider-container .swiper .swiper-slide .slide-con:hover .slide-details {
+            display: flex;
+        }
+
+        .image-slider-container .swiper .swiper-slide .slide-con:hover div.movie-info {
+            animation: 30s 1 m;
+        }
+
+        @keyframes m {
+            from {
+                transform: translateY(-85px);
+            }
+            1% {
+                transform: translateY(60px);
+            }
+            1.5% {
+                transform: translateY(0px);
+            }
+            2% {
+                transform: translateY(20px);
+            }
+            2.5% {
+                transform: translateY(0px);
+            }
+            to {
+                transform: translateY(0px);
+            }
+        }
+
+        .image-slider-container .swiper .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.6);
+        }
+
+        /* features card */
+
+        /* features card */
+        @import url("https://fonts.googleapis.com/css?family=Lato:300,400,700");
+
+        *,
+        html {
+            padding: 0;
+            margin: 0;
+            font-family: "Lato", sans-serif;
+        }
+
+        .shape-box {
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+            max-width: 500px;
+            height: 430px;
+            margin: 30px 10px 30px;
+            box-shadow: 0 6px 30px 0 rgba(0, 0, 0, .12);
+            overflow: hidden;
+            width: 23.333%;
+        }
+
+        .shape-box_half {
+            overflow: hidden;
+            text-align: left;
+        }
+
+        .shape-box_half:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            transform: skewY(53.5deg);
+            transform-origin: top left;
+            transition: \transform .4s;
+            background: #fff;
+            z-index: 1;
+        }
+
+        .shape-box>img {
+            width: 100%;
+            height: 100%;
+            -o-object-fit: cover;
+            object-fit: cover;
+        }
+
+        .bg-black {
+            background-color: #000;
+        }
+
+        .shape-box_half figcaption {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 0 30px 30px;
+            transition: \transform .4s;
+            transform: translateY(100%);
+            z-index: 3;
+        }
+
+        .shape-box_half figcaption .show-cont {
+            position: absolute;
+            bottom: calc(100% + 30px);
+            left: 30px;
+            right: 30px;
+            transition: bottom .4s;
+        }
+
+        .card-no {
+            font-size: 36px;
+            color: rgb(239, 26, 143);
+            padding: 0;
+            margin: 10px 0;
+        }
+
+        .card-main-title {
+            margin-top: 8px;
+            font-weight: 700;
+            font-size: 24px;
+            text-transform: uppercase;
+            color: #292b2c;
+        }
+
+        .card-content {
+            color: #9f9f9f;
+            margin-top: 20px;
+            line-height: 22px;
+            font-size: 15px;
+        }
+
+        .shape-box_half>.after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgb(239, 26, 143);
+            opacity: 0;
+            transition: opacity .4s;
+        }
+
+        /*On hover*/
+        .shape-box_half:hover:before {
+            transform: skewY(20deg);
+        }
+
+        .shape-box_half:hover figcaption {
+            transform: translateY(0);
+        }
+
+        .shape-box_half:hover figcaption .show-cont {
+            bottom: 100%;
+        }
+
+        .shape-box_half:hover>.after {
+            opacity: 1;
+        }
+
+        /* features Text */
+        @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+        .dis{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .waviy {
+        position: relative;
+        -webkit-box-reflect: below -20px linear-gradient(transparent, rgba(0,0,0,.2));
+        font-size: 45px;
+        }
+        .waviy span {
+        font-family: 'Alfa Slab One', cursive;
+        position: relative;
+        display: inline-block;
+        color: #000000;
+        text-transform: uppercase;
+        animation: flip 3s infinite;
+        animation-delay: calc(.3s * var(--i));
+        
+        }
+        @keyframes flip {
+        0%,80% {
+            transform: rotateY(360deg) 
+        }
+        }
+
+        /* objective in cards */
+        .category-name {
+            font-family: sans-serif;
+            width: -webkit-fill-available;
+            text-align: center;
+            font-size: 40px;
+        }
+
+        .card-category-2 ul, .card-category-3 ul, .card-category-4 ul, .card-category-5 ul  .card-category-6 ul {
+            padding: 0;
+        }
+            
+        .card-category-2 ul li, .card-category-3 ul li, .card-category-4 ul li, .card-category-5 ul li, .card-category-6 ul li {
+            list-style-type: none;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .card-category-2 ul li, .card-category-3 ul li {
+            margin: 10px 5px;
+        }
+
+        .card-category-1, .card-category-2, .card-category-3, .card-category-4, .card-category-5, .card-category-6 {
+            font-family: sans-serif;
+            margin-bottom: 45px;
+            text-align: center;
+        }
+
+        .card-category-1 div, .card-category-2 div {
+                display:inline-block;
+        }
+
+        .card-category-1 > div, .card-category-2 > div:not(:last-child) {
+                margin: 10px 5px;
+                text-align: left;
+        }
+
+        /* basic card */
+        .basic-card {
+            width:300px;
+            position: relative;
+            
+            -webkit-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.3);
+            -moz-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.3);
+            -o-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.3);
+            box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.3);
+        }
+        
+        .basic-card .card-content {
+                padding: 30px;
+        }
+
+        .basic-card .card-title {
+                font-size: 25px;
+                font-family: 'Open Sans', sans-serif;
+        }
+
+        .basic-card .card-text {
+                line-height: 1.6;
+        }
+
+        .basic-card .card-link {
+                padding: 25px;
+                width: -webkit-fill-available;
+        }
+
+        .basic-card .card-link a {
+                    text-decoration: none;
+                    position: relative;
+                    padding: 10px 0px;
+        }
+
+        .basic-card .card-link a:after {
+                    top: 30px;
+                    content: "";
+                    display: block;
+                    height: 2px;
+                    left: 50%;
+                    position: absolute;
+                    width: 0;
+
+                    -webkit-transition: width 0.3s ease 0s, left 0.3s ease 0s;
+                    -moz-transition: width 0.3s ease 0s, left 0.3s ease 0s;
+                    -o-transition: width 0.3s ease 0s, left 0.3s ease 0s;
+                    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+        }
+
+        .basic-card .card-link a:hover:after { 
+                    width: 100%; 
+                    left: 0; 
+        }
+        
+        
+        .basic-card-aqua {
+            background-image: linear-gradient(to bottom right, #00bfad, #99a3d4);
+        }
+
+            .basic-card-aqua .card-content, .basic-card .card-link a {
+                color: #fff;
+            }
+            
+            .basic-card-aqua .card-link {
+                border-top:1px solid #82c1bb;
+            }
+
+                .basic-card-aqua .card-link a:after {
+                    background:#fff;
+                }
+
+        .basic-card-lips {
+            background-image: linear-gradient(to bottom right, #ec407b, #ff7d94);
+        }
+
+            .basic-card-lips .card-content {
+                color: #fff;
+            }
+
+            .basic-card-lips .card-link {
+                border-top: 1px solid #ff97ba;
+            }
+
+                .basic-card-lips .card-link a:after {
+                    background:#fff;
+                }
+        
+        .basic-card-light {
+            border: 1px solid #eee;
+        }
+
+            .basic-card-light .card-title, .basic-card-light .card-link a {
+                color: #636363;
+            }
+            
+            .basic-card-light .card-text {
+                color: #7b7b7b;
+            }
+
+            .basic-card-light .card-link {
+                border-top: 1px solid #eee;
+            }
+
+                .basic-card-light .card-link a:after {
+                    background:#636363;
+                }
+
+        .basic-card-dark {
+            background-image: linear-gradient(to bottom right, #252525, #4a4a4a);
+        }
+
+            .basic-card-dark .card-title, .basic-card-dark .card-link a {
+                color:#eee;
+            }
+
+            .basic-card-dark .card-text {
+                color: #dcdcdcdd;
+            }
+
+            .basic-card-dark .card-link {
+                border-top: 1px solid #636363;
+            }
+
+            .basic-card-dark .card-link a:after {
+                background:#eee;
+            }
+        
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Top banner -->
+    {% comment %} <div class="top-banner">
+        <div class="container">
+            <div class="small-bold-text banner-text">Text Summarization</div>
+        </div>
+    </div> {% endcomment %}
+
+
+    <nav>
+        <div class="container main-nav flex" style="padding-left: 0px; padding-right: 0px;">
+            <a href="#" class="company-logo">
+                <img src="{% static 'images/SumRite1.jpg' %}" alt="Logo" style="width:281px; height:68px;" />
+            </a>
+            <div class="nav-links">
+                <ul class="flex">
+                    <li><a href="home" class="hover-links secondary-button">Home</a></li>
+                    <li><a href="{% url 'logout' %}" class="hover-links primary-button">LogOut</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
+    <section class="image-slider-container">
+        <div class="image-slider-heading">
+            <h2 class="image-slider-title">
+             Summarization Tools 💻
+            </h2> 
+            <div class="swiper-pagination"></div>
+        </div>
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="slide-con">
+                        <img src="{% static 'images/news_summary.png' %}"
+                            alt="">
+                        <div class="slide-details">
+                            <div class="movie-info">
+                                <h2 class="movie-name" title="">
+                                    Newsletter Summary
+                                </h2>
+                                <span class="movie-full-time" title="">
+                                    Tool 1
+                                </span>
+                                <span class="movie-views" title="">
+                                    
+                                </span>
+                            </div>
+                            <div class="movie-btns">
+                                <a href="{% url 'newsletter' %}" class="imdb-rate" title="">
+
+                                    Try It Now
+
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="slide-con"><img
+                            src="{% static 'images/Dialogue_summary.jpg' %}"
+                            alt="">
+                            <div class="slide-details">
+                                <div class="movie-info">
+                                    <h2 class="movie-name" title="">
+                                        Dialogue Summary
+                                    </h2>
+                                    <span class="movie-full-time" title="">
+                                        Tool 2
+                                    </span>
+                                    <span class="movie-views" title="">
+                                        
+                                    </span>
+                                </div>
+                                <div class="movie-btns">
+                                    <a href="{% url 'speech' %}" class="imdb-rate" title="">
+    
+                                        Try It Now
+    
+                                    </a>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="slide-con"><img
+                            src="{% static 'images/Email_summary.jpg' %}"
+                            alt="">
+                            <div class="slide-details">
+                                <div class="movie-info">
+                                    <h2 class="movie-name" title="">
+                                        Email Summary
+                                    </h2>
+                                    <span class="movie-full-time" title="">
+                                        Tool 3
+                                    </span>
+                                    <span class="movie-views" title="">
+                                        
+                                    </span>
+                                </div>
+                                <div class="movie-btns">
+                                    <a href="{% url 'email' %}" class="imdb-rate" title="">
+    
+                                        Try It Now
+    
+                                    </a>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="slide-con">
+                        <img src="{% static 'images/Audio_summary.jpg' %}" alt="">
+                        <div class="slide-details">
+                            <div class="movie-info">
+                                <h2 class="movie-name" title="">
+                                    Audio Summary
+                                </h2>
+                                <span class="movie-full-time" title="">
+                                    Tool 4
+                                </span>
+                                <span class="movie-views" title="">
+                                    
+                                </span>
+                            </div>
+                            <div class="movie-btns">
+                                <a href="{% url 'audio' %}" class="imdb-rate" title="">
+
+                                    Try It Now
+
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="slide-con">
+                        <img src="{% static 'images/Image_summary.jpg' %}"
+                            alt="">
+                            <div class="slide-details">
+                                <div class="movie-info">
+                                    <h2 class="movie-name" title="">
+                                        Image Summary
+                                    </h2>
+                                    <span class="movie-full-time" title="">
+                                        Tool 5
+                                    </span>
+                                    <span class="movie-views" title="">
+                                        
+                                    </span>
+                                </div>
+                                <div class="movie-btns">
+                                    <a href="{% url 'image' %}" class="imdb-rate" title="">
+    
+                                        Try It Now
+    
+                                    </a>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="slide-con"><img
+                            src="{% static 'images/Youtube_summary.jpg' %}"
+                            alt="">
+                            <div class="slide-details">
+                                <div class="movie-info">
+                                    <h2 class="movie-name" title="">
+                                        Youtube Video Summary
+                                    </h2>
+                                    <span class="movie-full-time" title="">
+                                        Tool 6
+                                    </span>
+                                    <span class="movie-views" title="">
+                                        
+                                    </span>
+                                </div>
+                                <div class="movie-btns">
+                                    <a href="#" class="imdb-rate" title="">
+    
+                                        Try It Now
+    
+                                    </a>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="slide-con"><img
+                            src="{% static 'images/news_summary.png' %}"
+                            alt="">
+                            <div class="slide-details">
+                                <div class="movie-info">
+                                    <h2 class="movie-name" title="">
+                                        Newsletter Summary
+                                    </h2>
+                                    <span class="movie-full-time" title="">
+                                        Tool 1
+                                    </span>
+                                    <span class="movie-views" title="">
+                                        
+                                    </span>
+                                </div>
+                                <div class="movie-btns">
+                                    <a href="{% url 'newsletter' %}" class="imdb-rate" title="">
+    
+                                        Try It Now
+    
+                                    </a>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="slide-con"><img
+                            src="{% static 'images/Dialogue_summary.jpg' %}"
+                            alt="">
+                            <div class="slide-details">
+                                <div class="movie-info">
+                                    <h2 class="movie-name" title="">
+                                        Dialogue Summary
+                                    </h2>
+                                    <span class="movie-full-time" title="">
+                                        Tool 2
+                                    </span>
+                                    <span class="movie-views" title="">
+                                        
+                                    </span>
+                                </div>
+                                <div class="movie-btns">
+                                    <a href="{% url 'speech' %}" class="imdb-rate" title="">
+    
+                                        Try It Now
+    
+                                    </a>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+   <script>
+        new Swiper(".swiper", {
+            loop: true,
+            effect: 'coverflow',
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            speed: 500,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true, 
+            
+            },
+  
+            breakpoints	: {
+            768: {
+                centeredSlides: false,
+             coverflowEffect:{
+
+          depth: 0, 
+
+          rotate: 0, 
+
+          stretch : -10, 
+
+         
+
+         } 
+            }
+            },
+             autoplay: {
+              delay: 3000,
+             },
+         coverflowEffect:{
+          depth: 80, 
+          rotate: 50, 
+          stretch : 20, 
+         
+         } 
+        })
+    </script>
+
+    <div class="container">
+        <!-- <a href="#" class="company-logo">
+            <img src="{% static 'images/home_img.jpeg' %}" alt="Logo"
+                style="margin-left: 165px; margin-top: 40px; margin-bottom: 15px; width:800px; height:300px;" />
+        </a>  -->
+        <section class="feature_part pt-2">
+            <div class="container my-2" style="align-items: center;">
+                <div class="button-group">
+                    <a href="{% url 'newsletter' %}" class="button ">Newsletter Summary</a>
+                    <a href="{% url 'speech' %}" class="button">Dialogue Summary</a>
+                    <a href="{% url 'email' %}" class="button">Email Summary</a>
+                    <a href="{% url 'audio' %}" class="button">Audio/Video Summary</a>
+                    <a href="{% url 'image' %}" class="button">Image Summary</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+
+<script>
+    $(window).scroll(function() {
+  
+  // selectors
+  var $window = $(window),
+      $body = $('body'),
+      $panel = $('.panel');
+  
+  // Change 33% earlier than scroll position so colour is there when you arrive.
+  var scroll = $window.scrollTop() + ($window.height() / 3);
+ 
+  $panel.each(function () {
+    var $this = $(this);
+    
+    // if position is within range of this panel.
+    // So position of (position of top of div <= scroll position) && (position of bottom of div > scroll position).
+    // Remember we set the scroll to 33% earlier in scroll var.
+    if ($this.position().top <= scroll && $this.position().top + $this.height() > scroll) {
+          
+      // Remove all classes on body with color-
+      $body.removeClass(function (index, css) {
+        return (css.match (/(^|\s)color-\S+/g) || []).join(' ');
+      });
+       
+      // Add class of currently active div
+      $body.addClass('color-' + $(this).data('color'));
+    }
+  });    
+  
+}).scroll();
+</script>
+
+<div class="container">
+    <h3 style="color: #000;">Applications of Summarization?</h3>
+    <p style="text-transform: none;">Summarization applications are software tools 
+        that use natural language processing (NLP) algorithms to automatically 
+        generate summaries of text-based content</p>
+</div>
+
+<div class="waviy dis">
+    <span style="--i:1">F</span>
+    <span style="--i:2">E</span>
+    <span style="--i:3">A</span>
+    <span style="--i:4">T</span>
+    <span style="--i:5">U</span>
+    <span style="--i:6">R</span>
+    <span style="--i:7">E</span>
+    <span style="--i:8">S</span>
+</div>
+
+    <section class="companies"></section>
+    
+    <!-- features Section -->
+    <div class="box-wrapper">
+        <section class="features">
+            <div class="container panel" data-color="metal">
+                <div class="features-header">
+                    <div class="row flex">
+                        <figure class="shape-box shape-box_half">
+                            <img src="{% static 'images\attribute_home.png' %}" alt="">
+                            <div class="brk-abs-overlay z-index-0 bg-black opacity-60"></div>
+                            <figcaption>
+                                <div class="show-cont">
+                                    <h3 class="card-no">01</h3>
+                                    <h4 class="card-main-title">Attribute</h4>
+                                </div>
+                                <p class="card-content">A summarization system is a type of natural language processing (NLP) application that can
+                                    automatically condense and extract the most important information from a document or a set
+                                    of documents, and present it in a shorter, more manageable form</p>
+                                <a href="#" class="read-more-btn">Read More</a>
+                            </figcaption>
+                            <span class="after"></span>
+                        </figure>
+                        <figure class="shape-box shape-box_half">
+                            <img src="{% static 'images\input_home.jpg' %}">
+                            <div class="brk-abs-overlay z-index-0 bg-black opacity-60"></div>
+                            <figcaption>
+                                <div class="show-cont">
+                                    <h3 class="card-no">02</h3>
+                                    <h4 class="card-main-title">Input Sources</h4>
+                                </div>
+                                <p class="card-content">Summarization systems can take input from a variety of sources, including news articles,
+                                    research papers, emails, social media posts, and more.</p>
+                                <a href="#" class="read-more-btn">Read More</a>
+                            </figcaption>
+                            <span class="after"></span>
+                        </figure>
+                        <figure class="shape-box shape-box_half">
+                            <img src="{% static 'images\output_home.png' %}">
+                            <div class="brk-abs-overlay z-index-0 bg-black opacity-60"></div>
+                            <figcaption>
+                                <div class="show-cont">
+                                    <h3 class="card-no">03</h3>
+                                    <h4 class="card-main-title">Output Setup</h4>
+                                </div>
+                                <p class="card-content">Summarization systems can produce summaries in a variety of formats, such as bullet points,
+                                    highlights, or condensed paragraphs.</p>
+                                <a href="#" class="read-more-btn">Read More</a>
+                            </figcaption>
+                            <span class="after"></span>
+                        </figure>
+                        <figure class="shape-box shape-box_half">
+                            <img src="{% static 'images\timeliness_news.jpg' %}">
+                            <div class="brk-abs-overlay z-index-0 bg-black opacity-60"></div>
+                            <figcaption>
+                                <div class="show-cont">
+                                    <h3 class="card-no">04</h3>
+                                    <h4 class="card-main-title">Quality</h4>
+                                </div>
+                                <p class="card-content">Summarization systems can be evaluated based on various metrics, including the level of
+                                    coherence, accuracy, readability, and relevance of the generated summary.</p>
+                                <a href="#" class="read-more-btn">Read More</a>
+                            </figcaption>
+                            <span class="after"></span>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="container">
+        <h3 style="color: #000;">Task Ease by Summarization?</h3>
+        <p style="text-transform: none;"> Summarization can help us quickly grasp the key points and main ideas of a text, 
+            allowing us to save time and avoid having to read through lengthy documents, better understand complex or 
+            technical information by breaking it down into simpler, more digestible pieces and communicate more effectively 
+            by allowing us to convey information concisely and clearly</p>
+    </div>
+
+    <section>
+        <div class="container panel" data-color="metal2">
+            <img src="{% static 'images/home.jpg' %}" alt="Newsletter" style="width:770px; height:370px;" class="center" />
+        </div>
+        <br>
+    </section>
+
+    <section>
+        <br>
+        <div class="category-name" style="color: #000;"><b>OBJECTIVES</b></div> 
+        <br/>
+        <div class="card-category-1">
+            <div class="basic-card basic-card-aqua">
+                <div class="card-content">
+                    <p class="card-text" style="text-align: justify; text-transform: none;">
+                        News Aggregation: Text summarization can be used to aggregate news articles from
+                        various sources and provide a summary of each article for readers. This can save
+                        readers time and help them get a quick understanding of the key points in each
+                        article.
+                    </p>
+                </div>
+            </div>
+
+            <div class="basic-card basic-card-lips">
+                <div class="card-content">
+                    <p class="card-text" style="text-align: justify; text-transform: none;">
+                        Business Intelligence: Summarization tools can be used to extract key insights from
+                        large volumes of business data, such as customer feedback or reports. This can
+                        help companies make more informed decisions and identify trends and patterns in
+                        their data.
+                    </p>
+                </div>
+            </div>
+
+            <div class="basic-card basic-card-light">
+                <div class="card-content">
+                    <p class="card-text" style="text-align: justify; text-transform: none;">
+                        Content Creation: Summarization tools can be used to generate summaries of existing
+                        content, such as blog posts or research papers. This can be useful for content marketers who want to 
+                        summaries of long-form content to share on social media.
+                    </p>
+                </div>
+            </div>
+
+            <div class="basic-card basic-card-dark">
+                <div class="card-content">
+                    <p class="card-text" style="text-align: justify; text-transform: none;">
+                        Legal and Medical: Summarization tools can be used to quickly extract key
+                        information from medical documents, such as contracts or medical
+                        records. This can make more informed decisions
+                        based on the most important information in the document.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <br/> 
+      
+    </section>
+
+    <footer class="footer" style="margin-top: 250px;">
+        <div class="container1">
+            <div class="row1">
+                <div class="footer-col">
+                    <h4>company</h4>
+                    <ul>
+                        <li><a href="{% url 'about' %}">about us</a></li>
+                        <li><a href="{% url 'team' %}">Our Team</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Actions</h4>
+                    <ul>
+                        <li><a href="{% url 'newsletter' %}">Newsletter Summary</a></li>
+                        <li><a href="{% url 'summarize' %}">Scientific Paper Summary</a></li>
+                        <li><a href="{% url 'speech' %}">Dialogue/Email Summary</a></li>
+                        <li><a href="{% url 'audio' %}">Audio Summary</a></li>
+                        <li><a href="{% url 'image' %}">Image Summary</a></li>
+                    </ul>
+                </div>
+                {% comment %} <div class="footer-col">
+                    <h4>online shop</h4>
+                    <ul>
+                        <li><a href="#">watch</a></li>
+                        <li><a href="#">bag</a></li>
+                        <li><a href="#">shoes</a></li>
+                        <li><a href="#">dress</a></li>
+                    </ul>
+                </div> {% endcomment %}
+                <div class="footer-col">
+                    <h4>follow us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
+
+
+
+<div class="seb-footer"></div>
+<script src="https://kit.fontawesome.com/e101b4eedb.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

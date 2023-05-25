@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+{% load static%}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SummaRite</title>
+    <link rel="stylesheet" href="sum.css">
+    
+    <script type="text/javascript" src="request.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;1,400&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        :root {
+            --primary-text-color: #ffffff;
+            --secondary-text-color: black;
+            --accent-color: #2294ed;
+            --accent-color-dark: rgb(255, 132, 183);
+            --padding-inline-section: 20px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--primary-text-color);
+            background: whitesmoke;
+        }
+
+        /* textarea */
+        label, textarea {
+        display: block;
+        }
+
+        label {
+        margin-bottom: .25rem;
+        }
+
+        textarea {
+        width: 100%;
+        min-height: 8.75rem;
+        padding: .5rem;
+        border: .125rem solid #999;
+        border-radius: .25rem;
+        font: inherit;
+        background-color: #fff;
+        }
+
+        /*summarize button*/
+        .login-box {
+            position: absolute;
+            margin-top: 493px;
+            top: 50%;
+            left: 53.5%;
+            width: 0px;
+            padding: 0px;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,.5);
+            box-sizing: border-box;
+            box-shadow: 0 15px 25px rgba(0,0,0,.6);
+            border-radius: 10px;
+        }
+
+        .login-box h2 {
+            margin: 0 0 30px;
+            padding: 0;
+            color: #fff;
+            text-align: center;
+        }
+
+        .login-box .user-box {
+            position: relative;
+        }
+
+        .login-box .user-box input {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 30px;
+            border: none;
+            border-bottom: 1px solid #fff;
+            outline: none;
+            background: transparent;
+        }
+        .login-box .user-box label {
+            position: absolute;
+            top:0;
+            left: 0;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            pointer-events: none;
+            transition: .5s;
+        }
+
+        .login-box .user-box input:focus ~ label,
+        .login-box .user-box input:valid ~ label {
+            top: -20px;
+            left: 0;
+            color: #03e9f4;
+            font-size: 12px;
+        }
+
+        .login-box form a {
+            position: relative;
+            display: inline-block;
+            padding: 10px 20px;
+            color:rgb(239, 26, 143);
+            font-size: 16px;
+            text-decoration: none;
+            text-transform: uppercase;
+            overflow: hidden;
+            transition: .5s;
+            margin-top: 40px;
+            letter-spacing: 4px
+        }
+
+        .login-box a:hover {
+            background: rgb(239, 26, 143);
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgb(239, 26, 143),
+                        0 0 10px rgb(239, 26, 143),
+                        0 0 20px rgb(239, 26, 143),
+                        0 0 30px rgb(239, 26, 143);
+        }
+
+        .login-box a span {
+            position: absolute;
+            display: block;
+        }
+
+        .login-box a span:nth-child(1) {
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgb(239, 26, 143));
+            animation: btn-anim1 1s linear infinite;
+        }
+
+        @keyframes btn-anim1 {
+        0% {
+            left: -100%;
+        }
+        50%,100% {
+            left: 100%;
+        }
+        }
+
+        .login-box a span:nth-child(2) {
+        top: -100%;
+        right: 0;
+        width: 2px;
+        height: 100%;
+        background: linear-gradient(180deg, transparent, rgb(239, 26, 143));
+        animation: btn-anim2 1s linear infinite;
+        animation-delay: .25s
+        }
+
+        @keyframes btn-anim2 {
+        0% {
+            top: -100%;
+        }
+        50%,100% {
+            top: 100%;
+        }
+        }
+
+        .login-box a span:nth-child(3) {
+        bottom: 0;
+        right: -100%;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(270deg, transparent, rgb(239, 26, 143));
+        animation: btn-anim3 1s linear infinite;
+        animation-delay: .5s
+        }
+
+        @keyframes btn-anim3 {
+        0% {
+            right: -100%;
+        }
+        50%,100% {
+            right: 100%;
+        }
+        }
+
+        .login-box a span:nth-child(4) {
+        bottom: -100%;
+        left: 0;
+        width: 2px;
+        height: 100%;
+        background: linear-gradient(360deg, transparent, rgb(239, 26, 143));
+        animation: btn-anim4 1s linear infinite;
+        animation-delay: .75s
+        }
+
+        @keyframes btn-anim4 {
+        0% {
+            bottom: -100%;
+        }
+        50%,100% {
+            bottom: 100%;
+        }
+        }
+
+        /*scrolling color change*/
+        .panel {
+            /* min height incase content is higher than window height */
+            min-height: 100vh;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            font-family: sans-serif;
+            /* outline: 10px solid hotpink; */
+            /* turn above on to see the edge of panels */
+        }
+        
+        /* colours */
+        .color-metal {
+            background: #abbaab;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #ffffff, #abbaab);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        }
+        .color-metal2 {
+            background: #abbaab;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to left, #ffffff, #abbaab);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to left, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        }
+
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        p {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.25rem;
+            color: var(--secondary-text-color);
+            line-height: 1.8rem;
+        }
+
+        a {
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* utility class */
+        .small-bold-text {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1180px;
+            margin-inline: auto;
+            padding-inline: var(--padding-inline-section);
+        }
+
+        /* flex */
+        .flex {
+            display: flex;
+            align-items: center;
+        }
+
+        .hover-links {
+            color: black;
+        }
+
+        .hover-links .active{
+            color : black;
+        }
+
+        .hover-links:hover {
+            color: rgb(239, 26, 143);
+            transition: 0.2s ease-out;
+        }
+
+        .primary-button {
+            background-color: var(--primary-text-color);
+            border-radius: 6px;
+            font-weight: 700;
+            color: rgb(239, 26, 143) !important;
+            padding: 12px 24px;
+            box-shadow: 0 0 2px var(--secondary-text-color);
+            transition: 0.2s ease-out;
+        }
+
+        .primary-button:hover {
+            background-color: var(--accent-color-dark);
+        }
+
+        .secondary-button {
+            border: 0.5px solid var(--secondary-text-color);
+            border-radius: 6px;
+            font-weight: 700;
+            color: var(--accent-color) !important;
+            padding: 12px 24px;
+            transition: 0.2s ease-out;
+        }
+
+        .secondary-button:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color-dark) !important;
+        }
+
+        /* top banner */
+
+        .top-banner {
+            background-image: url('assets/asset 32.png');
+            background-color: rgb(239, 26, 143);
+            background-size: 300px;
+
+        }
+
+        .banner-text {
+            color: rgb(239, 26, 143);
+            padding: 15px 20px;
+            text-align: center;
+        }
+
+        /* main-nav */
+        .main-nav {
+            margin-top: 10px;
+            justify-content: space-between;
+            height: 116px;
+
+        }
+
+        .company-logo {
+            width: 200px;
+        }
+
+        .nav-links {
+            flex-basis: 730px;
+        }
+
+        .nav-links ul {
+            justify-content: end;
+            gap: 40px;
+        }
+
+        .header-section {
+            height: 600px;
+            align-items: center;
+        }
+
+        textarea {
+            background-color: whitesmoke;
+            margin: 20px;
+            width: 500px;
+            height: 300px;
+        }
+
+        .but-sum {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 6px;
+            font-weight: 700;
+            color: black !important;
+            padding: 12px 24px;
+            transition: 0.2s ease-out;
+        }
+
+        .but-sum:hover {
+            border-color: rgb(239, 26, 143);
+            color: rgb(0, 0, 194) !important;
+        }
+
+        .features-header {
+            background-image: url('assets/asset 13.png');
+            /* background-repeat: no-repeat;     */
+            background-position: center;
+        }
+
+        .row {
+            text-align: center;
+            height: 305px;
+            align-items: center;
+        }
+
+        .row2 {
+            text-align: center;
+            height: 400px;
+            align-items: center;
+            color: rgb(249, 26, 143);
+        }
+
+        col {
+            margin: 40px;
+            border: 1px;
+            border-color: black;
+        }
+
+        .row h2 {
+            color: rgb(249, 26, 143);
+        }
+
+        .heading{
+            margin-top: 24px;
+            margin-left: 21px;
+            position: absolute;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        body {
+            line-height: 1.5;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container1 {
+            max-width: 1170px;
+            margin: auto;
+        }
+
+        .row1 {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .footer {
+            background-color: #24262b;
+            padding: 70px 0;
+        }
+
+        .footer-col {
+            width: 33%;
+            padding: 0 15px;
+        }
+
+        .footer-col h4 {
+            font-size: 18px;
+            color: #ffffff;
+            text-transform: capitalize;
+            margin-bottom: 35px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .footer-col h4::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            background-color: #e91e63;
+            height: 2px;
+            box-sizing: border-box;
+            width: 50px;
+        }
+
+        .footer-col ul li:not(:last-child) {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            font-size: 16px;
+            text-transform: capitalize;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 300;
+            color: #bbbbbb;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .footer-col ul li a:hover {
+            color: #ffffff;
+            padding-left: 8px;
+        }
+
+        .footer-col .social-links a {
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            background-color: rgba(255, 255, 255, 0.2);
+            margin: 0 10px 10px 0;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            color: #ffffff;
+            transition: all 0.5s ease;
+        }
+
+        .footer-col .social-links a:hover {
+            color: #24262b;
+            background-color: #ffffff;
+        }
+
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+
+        /*responsive*/
+        @media(max-width: 767px) {
+            .footer-col {
+                width: 50%;
+                margin-bottom: 30px;
+            }
+        }
+
+        @media(max-width: 574px) {
+            .footer-col {
+                width: 100%;
+            }
+        }
+
+        /*textBox Area*/
+        @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,700,300italic);
+        *, *:before, *:after { box-sizing: border-box; }
+        html { font-size: 100%;  }
+        /* body { 
+        font-family: 'Open Sans', sans-serif;
+        font-size: 16px;
+        background: #d0e6ef; 
+        color: #666;
+        } */
+
+        .wrapper {
+        max-width: 75%;
+        margin: auto;
+        }
+
+
+        #text_head{
+            color: #555; 
+            margin: 3rem 0 1rem 21px; 
+            padding: 0;
+            font-size: 1.5rem;
+        }
+
+        h1{ 
+        color: #555; 
+        margin: 3rem 0 1rem 0; 
+        padding: 0;
+        font-size: 1.5rem;
+        }
+
+        textarea {
+            text-transform: none;
+            text-align: justify;
+            font-family: "Times New Roman", Times, serif;
+            color:black;
+            width: -webkit-fill-available;
+            min-height: 100px;
+            resize: none;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            padding: 0.5rem;
+            color: #666;
+            box-shadow: inset 0 0 0.25rem #ddd;
+            }
+        .focus {
+            outline: none;
+            border: 1px solid darken(#ddd, 5%);
+            box-shadow: inset 0 0 0.5rem darken(#ddd, 5%);
+        }
+        .placeholder { 
+            font-style: italic;
+            font-size: 0.875rem;
+        } 
+
+        #the-count {
+        float: right;
+        padding: 0.1rem 0 0 0;
+        font-size: 0.875rem;
+        }
+
+        #the-count2 {
+            float: right;
+            padding: 0.1rem 0 0 0;
+            font-size: 0.875rem;
+        }
+
+        /* features card */
+        @import url("https://fonts.googleapis.com/css?family=Lato:300,400,700");
+
+        *,
+        html {
+            padding: 0;
+            margin: 0;
+            font-family: "Lato", sans-serif;
+        }
+
+        .shape-box {
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+            max-width: 500px;
+            height: 430px;
+            margin: 30px 10px 30px;
+            box-shadow: 0 6px 30px 0 rgba(0, 0, 0, .12);
+            overflow: hidden;
+            width: 23.333%;
+        }
+
+        .shape-box_half {
+            overflow: hidden;
+            text-align: left;
+        }
+
+        .shape-box_half:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            transform: skewY(53.5deg);
+            transform-origin: top left;
+            transition: \transform .4s;
+            background: #fff;
+            z-index: 1;
+        }
+
+        .shape-box>img {
+            width: 100%;
+            height: 100%;
+            -o-object-fit: cover;
+            object-fit: cover;
+        }
+
+        .bg-black {
+            background-color: #000;
+        }
+
+        .shape-box_half figcaption {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 0 30px 30px;
+            transition: \transform .4s;
+            transform: translateY(100%);
+            z-index: 3;
+        }
+
+        .shape-box_half figcaption .show-cont {
+            position: absolute;
+            bottom: calc(100% + 30px);
+            left: 30px;
+            right: 30px;
+            transition: bottom .4s;
+        }
+
+        .card-no {
+            font-size: 36px;
+            color: rgb(239, 26, 143);
+            padding: 0;
+            margin: 10px 0;
+        }
+
+        .card-main-title {
+            margin-top: 8px;
+            font-weight: 700;
+            font-size: 24px;
+            text-transform: uppercase;
+            color: #292b2c;
+        }
+
+        .card-content {
+            color: #9f9f9f;
+            margin-top: 20px;
+            line-height: 22px;
+            font-size: 15px;
+        }
+
+        .shape-box_half>.after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgb(239, 26, 143);
+            opacity: 0;
+            transition: opacity .4s;
+        }
+
+        /*On hover*/
+        .shape-box_half:hover:before {
+            transform: skewY(20deg);
+        }
+
+        .shape-box_half:hover figcaption {
+            transform: translateY(0);
+        }
+
+        .shape-box_half:hover figcaption .show-cont {
+            bottom: 100%;
+        }
+
+        .shape-box_half:hover>.after {
+            opacity: 1;
+        }
+
+        /* features Text */
+        @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+        .dis{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .waviy {
+        position: relative;
+        -webkit-box-reflect: below -20px linear-gradient(transparent, rgba(0,0,0,.2));
+        font-size: 45px;
+        }
+        .waviy span {
+        font-family: 'Alfa Slab One', cursive;
+        position: relative;
+        display: inline-block;
+        color: #000000;
+        text-transform: uppercase;
+        animation: flip 3s infinite;
+        animation-delay: calc(.3s * var(--i));
+        
+        }
+        @keyframes flip {
+        0%,80% {
+            transform: rotateY(360deg) 
+        }
+        }
+
+        /* summary generate */
+        * {
+            text-transform: capitalize;
+            box-sizing: border-box;
+        }
+        .personal-card  {
+            padding: 15px 0;
+            margin: 0 auto;
+        }
+        .container12 {
+            width: 600px;
+            height: 600px;
+            background-color: #EEEEEE;
+            position: relative;
+            margin: 50px auto;
+            
+            
+        }
+        .container12 .info::after {
+            content: "a+";
+            background-color: #3B74BA;
+            width: 40px;
+            height: 30px;
+            position: absolute;
+            bottom: -10px;
+            right: 10px;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            font-size: 22px;
+            border-radius: 4px;
+        }
+        .container12 .info img {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            margin-top: -138px;
+            margin-left: -125px;
+            width: 250px;
+            height:auto;
+
+        }
+        .info {
+            width: 400px;
+            height: 400px;
+            background-color: white;
+            position: relative;
+            top: 30%;
+            left: 50%;
+            margin-left: -590px;
+            margin-top: -228px;
+
+        }
+        .general-info {
+            position: absolute;
+            top: 15px;
+            left: 10%;
+            text-align: center;
+            border-bottom: 2px solid lightgray;
+        }
+        .general-info h1 {
+            color: #3B74BA;
+        }
+        .general-info p {
+            color: darkgray;
+            font-size: 30px;
+            margin-top: -15px;
+        }
+        .social-info {
+            display: block;
+            grid-template-columns: 45% 45%;
+            background-color: beige;
+            width: 81%;
+            padding: 11px;
+            font-size: 20px;
+            position: absolute;
+            top: 57%;
+            left: 10%;
+        }
+        .social-info p {
+            margin: 0 0 10px;
+            padding: 10px;
+        }
+
+        /* objective in cards */
+        .category-name {
+            font-family: sans-serif;
+            width: -webkit-fill-available;
+            text-align: center;
+            font-size: 40px;
+        }
+
+        .card-category-2 ul, .card-category-3 ul, .card-category-4 ul, .card-category-5 ul  .card-category-6 ul {
+            padding: 0;
+        }
+            
+        .card-category-2 ul li, .card-category-3 ul li, .card-category-4 ul li, .card-category-5 ul li, .card-category-6 ul li {
+            list-style-type: none;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .card-category-2 ul li, .card-category-3 ul li {
+            margin: 10px 5px;
+        }
+
+        .card-category-1, .card-category-2, .card-category-3, .card-category-4, .card-category-5, .card-category-6 {
+            font-family: sans-serif;
+            margin-bottom: 45px;
+            text-align: center;
+        }
+
+        .card-category-1 div, .card-category-2 div {
+                display:inline-block;
+        }
+
+        .card-category-1 > div, .card-category-2 > div:not(:last-child) {
+                margin: 10px 5px;
+                text-align: left;
+        }
+
+        /* Basic Card */
+        .basic-card {
+            width:300px;
+            position: relative;
+            
+            -webkit-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.3);
+            -moz-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.3);
+            -o-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.3);
+            box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.3);
+        }
+        
+        .basic-card .card-content {
+                padding: 30px;
+        }
+
+        .basic-card .card-title {
+                font-size: 25px;
+                font-family: 'Open Sans', sans-serif;
+        }
+
+        .basic-card .card-text {
+                line-height: 1.6;
+        }
+
+        .basic-card .card-link {
+                padding: 25px;
+                width: -webkit-fill-available;
+        }
+
+        .basic-card .card-link a {
+                    text-decoration: none;
+                    position: relative;
+                    padding: 10px 0px;
+        }
+
+        .basic-card .card-link a:after {
+                    top: 30px;
+                    content: "";
+                    display: block;
+                    height: 2px;
+                    left: 50%;
+                    position: absolute;
+                    width: 0;
+
+                    -webkit-transition: width 0.3s ease 0s, left 0.3s ease 0s;
+                    -moz-transition: width 0.3s ease 0s, left 0.3s ease 0s;
+                    -o-transition: width 0.3s ease 0s, left 0.3s ease 0s;
+                    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+        }
+
+        .basic-card .card-link a:hover:after { 
+                    width: 100%; 
+                    left: 0; 
+        }
+        
+        
+        .basic-card-aqua {
+            background-image: linear-gradient(to bottom right, #00bfad, #99a3d4);
+        }
+
+            .basic-card-aqua .card-content, .basic-card .card-link a {
+                color: #fff;
+            }
+            
+            .basic-card-aqua .card-link {
+                border-top:1px solid #82c1bb;
+            }
+
+                .basic-card-aqua .card-link a:after {
+                    background:#fff;
+                }
+
+        .basic-card-lips {
+            background-image: linear-gradient(to bottom right, #ec407b, #ff7d94);
+        }
+
+            .basic-card-lips .card-content {
+                color: #fff;
+            }
+
+            .basic-card-lips .card-link {
+                border-top: 1px solid #ff97ba;
+            }
+
+                .basic-card-lips .card-link a:after {
+                    background:#fff;
+                }
+        
+        .basic-card-light {
+            border: 1px solid #eee;
+        }
+
+            .basic-card-light .card-title, .basic-card-light .card-link a {
+                color: #636363;
+            }
+            
+            .basic-card-light .card-text {
+                color: #7b7b7b;
+            }
+
+            .basic-card-light .card-link {
+                border-top: 1px solid #eee;
+            }
+
+                .basic-card-light .card-link a:after {
+                    background:#636363;
+                }
+
+        .basic-card-dark {
+            background-image: linear-gradient(to bottom right, #252525, #4a4a4a);
+        }
+
+            .basic-card-dark .card-title, .basic-card-dark .card-link a {
+                color:#eee;
+            }
+
+            .basic-card-dark .card-text {
+                color: #dcdcdcdd;
+            }
+
+            .basic-card-dark .card-link {
+                border-top: 1px solid #636363;
+            }
+
+            .basic-card-dark .card-link a:after {
+                background:#eee;
+            }
+
+            /* upload button */
+            @import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap');
+
+            *{
+                box-sizing: border-box;
+            }
+            svg:not(:root) {
+                overflow: hidden;
+            }
+            .main-wrapper {
+                max-width: 1170px;
+                margin: 0 auto;
+                text-align: center;
+            }
+            .upload-main-wrapper{
+                width: 220px;
+                margin: 0 auto;
+            }
+            #file-upload-name{
+                margin: 4px 0 0 0;
+                font-size: 12px;
+            }
+            .upload-wrapper {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                margin: 40px auto 0;
+                position: relative;
+                cursor: pointer;
+                background-color: #bcaef5;
+                padding: 8px 10px;
+                border-radius: 10px;
+                overflow: hidden;
+                transition: 0.2s linear all;
+                color: #ffffff;
+            }
+            .upload-wrapper input[type="file"] {
+                width: 100%;
+                position: absolute;
+                left: 0;
+                right: 0;
+                opacity: 0;
+                top: 0;
+                bottom: 0;
+                cursor: pointer;
+                z-index: 1;
+            }
+            .upload-wrapper > svg {
+                width: 50px;
+                height: auto;
+                cursor: pointer;
+            }
+            .upload-wrapper.success > svg{
+                transform: translateX(-200px);
+            }
+            .upload-wrapper.uploaded {
+                transition: 0.2s linear all;
+                width: 60px;
+                border-radius: 50%;
+                height: 60px;
+                text-align: center;
+            }
+            .upload-wrapper .file-upload-text {
+                position: absolute;
+                left: 80px;
+                opacity: 1;
+                visibility: visible;
+                transition: 0.2s linear all;
+            }
+            .upload-wrapper.uploaded .file-upload-text {
+                text-indent: -999px;
+                margin: 0;
+            }
+            .file-success-text {
+                opacity: 0;
+                transition: 0.2s linear all;
+                visibility: hidden;
+                transform: translateX(200px);
+                position: absolute;
+                left: 0;
+                right: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .file-success-text svg {
+                width: 25px;
+                height: auto;
+            }
+            .file-success-text span{
+            margin-left: 15px;
+            }
+            .upload-wrapper.success .file-success-text{
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+            }
+            .upload-wrapper.success.uploaded .file-success-text{
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+            }
+            .upload-wrapper.success.uploaded .file-success-text span{
+                display: none;
+            }
+            .upload-wrapper .file-success-text circle{
+                stroke-dasharray: 380;
+                stroke-dashoffset: 380;
+                transition: 1s linear all;
+                transition-delay: 1.4s;
+            }
+            .upload-wrapper.success .file-success-text  circle {
+                stroke-dashoffset: 0;
+            }
+            .upload-wrapper .file-success-text polyline {
+                stroke-dasharray: 380;
+                stroke-dashoffset: 380;
+                transition: 1s linear all;
+                transition-delay: 2s;
+            }
+            .upload-wrapper.success .file-success-text polyline {
+                stroke-dashoffset: 0;
+            }
+            .upload-wrapper.success .file-upload-text{
+                -webkit-animation-name: bounceOutLeft;
+                animation-name: bounceOutLeft;
+                -webkit-animation-duration: 0.2s;
+                animation-duration: 0.2s;
+                -webkit-animation-fill-mode: both;
+                animation-fill-mode: both;
+            }
+            @-webkit-keyframes bounceOutLeft {
+                20% {
+                    opacity: 1;
+                    -webkit-transform: translate3d(20px, 0, 0);
+                    transform: translate3d(20px, 0, 0);
+                }
+
+                to {
+                    opacity: 0;
+                    -webkit-transform: translate3d(-2000px, 0, 0);
+                    transform: translate3d(-2000px, 0, 0);
+                }
+            }
+
+            @keyframes bounceOutLeft {
+                20% {
+                    opacity: 1;
+                    -webkit-transform: translate3d(20px, 0, 0);
+                    transform: translate3d(20px, 0, 0);
+                }
+
+                to {
+                    opacity: 0;
+                    -webkit-transform: translate3d(-2000px, 0, 0);
+                    transform: translate3d(-2000px, 0, 0);
+                }
+            }
+    </style>
+
+</head>
+
+<body>
+    <!-- Top banner -->
+    {% comment %} <div class="top-banner">
+        <div class="container">
+            <div class="small-bold-text banner-text">Text Summarization</div>
+        </div>
+    </div> {% endcomment %}
+
+
+    <nav>
+        <div class="container main-nav flex" style="padding-left: 0px; padding-right: 0px;">
+            <a href="#" class="company-logo">
+                <img src="{% static 'images/SumRite1.jpg' %}" alt="Logo" style="width:281px; height:68px;" />
+            </a>
+            <div class="nav-links">
+                <ul class="flex">
+                    <li><a href="{% url 'newsletter' %}" class="hover-links" style="color: rgb(239, 26, 143);">Newsletter</a></li>
+                    <li><a href="{% url 'speech' %}" class="hover-links">Dialogue</a></li>
+                    <li><a href="{% url 'email' %}" class="hover-links">Email</a></li>
+                    <li><a href="{% url 'audio' %}" class="hover-links">Audio </a></li>
+                    <li><a href="{% url 'image' %}" class="hover-links">Image </a></li>
+                    <li><a href="home" class="hover-links secondary-button">Home</a></li>
+                    <li><a href="{% url 'logout' %}" class="hover-links primary-button">LogOut</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header style="align-items: center;">
+        
+
+        <div class="container header-section panel" style="display:flex">
+            <div class="wrapper" style="margin-top: 30px;">
+                <h1 id="text_head">Input Text</h1>
+                <textarea name="Input" id="input" style="width: 500px;" placeholder="Enter your text here"autofocus></textarea>
+                </div>
+
+            <div class="wrapper" style="margin-top: 30px;">
+                <h1 id="text_head">Summarized Text</h1>
+                    <textarea name="output_box_text" id="output_box_text" style="width: 500px;" placeholder="Get Summary Here"autofocus></textarea>
+                </div>
+            {% comment %} <button class="but-sum" onclick="handleFormSubmit()" 
+                style="display: flex;justify-content: center;align-items: center;">Summarize</button> {% endcomment %}
+        </div>
+
+        <div class="login-box" style="display: flex;justify-content: center;align-items: center;">
+            <form>
+                <div class="file file--upload" >
+                    <input id="myFileInput" placeholder="Upload Document" style="margin: 0 0 0 10px; color: black;"onchange="pdftotxt()" type="file" accept=".pdf,.docx" >
+                </div>
+              <a style="margin-right: 40px;display: flex;justify-content: center;align-items: center;" onclick="handleFormSubmit()" >
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Summarize
+              </a>
+              <br>
+            </form>
+        </div>
+    </header>
+
+<script>
+    async function pdftotxt() {
+        var musicFile = document.getElementById("myFileInput").files[0];
+
+        var formdata = new FormData();
+        formdata.append("file", musicFile);
+
+        await fetch("http://localhost:8081/uploadpdf", {
+            method: "POST",
+            body: formdata,
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                document.getElementById("input").innerHTML = data['text'];
+            })
+            .catch(error => console.log(error));
+        return false;
+    }
+
+    async function handleFormSubmit() {
+        console.log("Hello");
+        var mainText = document.getElementById('input').value;
+         console.log(mainText);
+        var summary = "";
+        try {
+            await fetch(`http://localhost:8081/output?summary=${mainText}`)
+            .then(res => res.json())
+            .then(data => {
+                summary = data;
+            });
+            console.log(summary["Output Text"])
+            document.getElementById("output_box_text").innerHTML = summary["Output Text"];
+        } 
+        catch (e) {
+            console.log(e);
+        }
+        return false;
+    } 
+</script>
+
+<!-- scrolling color change -->
+<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+<script>
+    $(window).scroll(function() {
+  
+  // selectors
+  var $window = $(window),
+      $body = $('body'),
+      $panel = $('.panel');
+  
+  // Change 33% earlier than scroll position so colour is there when you arrive.
+  var scroll = $window.scrollTop() + ($window.height() / 3);
+ 
+  $panel.each(function () {
+    var $this = $(this);
+    
+    // if position is within range of this panel.
+    // So position of (position of top of div <= scroll position) && (position of bottom of div > scroll position).
+    // Remember we set the scroll to 33% earlier in scroll var.
+    if ($this.position().top <= scroll && $this.position().top + $this.height() > scroll) {
+          
+      // Remove all classes on body with color-
+      $body.removeClass(function (index, css) {
+        return (css.match (/(^|\s)color-\S+/g) || []).join(' ');
+      });
+       
+      // Add class of currently active div
+      $body.addClass('color-' + $(this).data('color'));
+    }
+  });    
+  
+}).scroll();
+</script>
+
+<div class="container" style="margin-top: 100px;">
+    <h1> What is Newsletter Summarization?</h1>
+    <p style="text-transform: none;"> Newsletter summarization refers to the process of condensing 
+        the content of a newsletter into a shorter, more concise format. 
+        The goal of newsletter summarization is to provide readers with 
+        the most important information from the newsletter without overwhelming 
+        them with excessive detail.</p>
+</div>
+
+<div class="waviy dis">
+    <span style="--i:1">F</span>
+    <span style="--i:2">E</span>
+    <span style="--i:3">A</span>
+    <span style="--i:4">T</span>
+    <span style="--i:5">U</span>
+    <span style="--i:6">R</span>
+    <span style="--i:7">E</span>
+    <span style="--i:8">S</span>
+</div>
+    <section class="companies"></section>
+
+    <div class="box-wrapper">
+        <section class="features">
+            <div class="container panel" data-color="metal">
+                <div class="features-header">
+                    <div class="row flex">
+                        <figure class="shape-box shape-box_half">
+                            <img src="{% static 'images\concise_news.png' %}" alt="">
+                            <div class="brk-abs-overlay z-index-0 bg-black opacity-60"></div>
+                            <figcaption>
+                                <div class="show-cont">
+                                    <h3 class="card-no">01</h3>
+                                    <h4 class="card-main-title">Conciseness</h4>
+                                </div>
+                                <p class="card-content">The summary should be brief and to the point, avoiding unnecessary details or lengthy explanations. 
+                                    and written in clear and understandable language, avoiding technical jargon or complex terminology</p>
+                                <a href="#" class="read-more-btn">Read More</a>
+                            </figcaption>
+                            <span class="after"></span>
+                        </figure>
+                        <figure class="shape-box shape-box_half">
+                            <img src="{% static 'images\accuracy_news.jpg' %}">
+                            <div class="brk-abs-overlay z-index-0 bg-black opacity-60"></div>
+                            <figcaption>
+                                <div class="show-cont">
+                                    <h3 class="card-no">02</h3>
+                                    <h4 class="card-main-title">Accuracy</h4>
+                                </div>
+                                <p class="card-content">The summary should accurately reflect the content of the newsletter, without adding any biased or misleading information.</p>
+                                <a href="#" class="read-more-btn">Read More</a>
+                            </figcaption>
+                            <span class="after"></span>
+                        </figure>
+                        <figure class="shape-box shape-box_half">
+                            <img src="{% static 'images\personlisation_news.jpg' %}">
+                            <div class="brk-abs-overlay z-index-0 bg-black opacity-60"></div>
+                            <figcaption>
+                                <div class="show-cont">
+                                    <h3 class="card-no">03</h3>
+                                    <h4 class="card-main-title">Personalization</h4>
+                                </div>
+                                <p class="card-content">In some cases, it may be useful to customize the summary based on the specific interests or preferences of the reader.</p>
+                                <a href="#" class="read-more-btn">Read More</a>
+                            </figcaption>
+                            <span class="after"></span>
+                        </figure>
+                        <figure class="shape-box shape-box_half">
+                            <img src="{% static 'images\timeliness_news.jpg' %}">
+                            <div class="brk-abs-overlay z-index-0 bg-black opacity-60"></div>
+                            <figcaption>
+                                <div class="show-cont">
+                                    <h3 class="card-no">04</h3>
+                                    <h4 class="card-main-title">Timeliness</h4>
+                                </div>
+                                <p class="card-content">The summary should be delivered in a timely manner, ideally within a few hours or days of the original newsletter.</p>
+                                <a href="#" class="read-more-btn">Read More</a>
+                            </figcaption>
+                            <span class="after"></span>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="container">
+        <h1> Why Newsletter Summarization?</h1>
+        <p style="text-transform: none;"> Newsletter summarization is an important aspect because it helps readers quickly understand the key points and main 
+            ideas of a newsletter without having to read through the entire document. This is especially important for busy professionals who may not 
+            have the time to read lengthy newsletters, but still need to stay informed</p>
+        <br>
+        <p style="text-transform: none;"> By providing a concise summary of the newsletter's content, readers can easily determine whether or not the 
+            information is relevant to them and decide whether to read further or take action. Additionally, newsletter summarization can help improve the accessibility 
+            and usability of the content, making more likely that readers will engage with the newsletter and derive value from it.</p>
+    </div>
+
+    <section>
+        <div class="container panel" data-color="metal2">
+            <img src="{% static 'images/newsletter.webp' %}" alt="Newsletter" style="width:1000px; height:500px;" class="center"/>
+        </div>
+    </section>
+
+    <section>
+        <div class="category-name" style="color: #000;"><b>OBJECTIVES</b></div> 
+        <br/>
+        <div class="card-category-1">
+            <div class="basic-card basic-card-aqua">
+                <div class="card-content">
+                    <p class="card-text" style="text-align: justify; text-transform: none;">
+                        Using natural language processing techniques and machine 
+                        learning and algorithms, the system will analyze the dialogue 
+                        to identify the key topics, speakers, and utterances, enabling 
+                        it to generate a concise with coherent summary of the conversation.
+                    </p>
+                </div>
+            </div>
+
+            <div class="basic-card basic-card-lips">
+                <div class="card-content">
+                    <p class="card-text" style="text-align: justify; text-transform: none;">
+                        The system will aim to produce clear and condensed summaries 
+                        that effectively capture the crucial information in the 
+                        conversation, but while maintaining coherence and clarity to provide 
+                        an accurate representation of the dialogue or conversation.
+                    </p>
+                </div>
+            </div>
+
+            <div class="basic-card basic-card-light">
+                <div class="card-content">
+                    <p class="card-text" style="text-align: justify; text-transform: none;">
+                        The system's generated summaries will undergo evaluation based on 
+                        informativeness, and quality, and will be compared to 
+                        human-generated summaries to assess its effectiveness and performance 
+                        in accurately summarizing the dialogue.
+                    </p>
+                </div>
+            </div>
+
+            <div class="basic-card basic-card-dark">
+                <div class="card-content">
+                    <p class="card-text" style="text-align: justify; text-transform: none;">
+                        The Project aims to enhance the efficiency and accuracy of information 
+                        retrieval and decision-making in domains, with business 
+                        meetings, also provide customer support interactions, and academic discussions by 
+                        providing a Quick and Informative Summary of the Dialogue.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <br/> 
+      
+    </section>
+
+    <footer class="footer" style="margin-top: 100px;">
+        <div class="container1">
+            <div class="row1">
+                <div class="footer-col">
+                    <h4>company</h4>
+                    <ul>
+                        <li><a href="{% url 'about' %}">About us</a></li>
+                        <li><a href="{% url 'team' %}">Our Team</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Actions</h4>
+                    <ul>
+                        <li><a href="{% url 'newsletter' %}" style="color: rgb(239, 26, 143)">Newsletter Summary</a></li>
+                        <li><a href="{% url 'summarize' %}">Scientific Paper Summary</a></li>
+                        <li><a href="{% url 'speech' %}">Dialogue/Email Summary</a></li>
+                        <li><a href="{% url 'audio' %}">Audio Summary</a></li>
+                        <li><a href="{% url 'image' %}">Image Summary</a></li>
+                    </ul>
+                </div>
+                {% comment %} <div class="footer-col">
+                    <h4>online shop</h4>
+                    <ul>
+                        <li><a href="#">watch</a></li>
+                        <li><a href="#">bag</a></li>
+                        <li><a href="#">shoes</a></li>
+                        <li><a href="#">dress</a></li>
+                    </ul>
+                </div> {% endcomment %}
+                <div class="footer-col">
+                    <h4>follow us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
+
+
+
+<div class="seb-footer"></div>
+<script src="https://kit.fontawesome.com/e101b4eedb.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
